@@ -81,19 +81,19 @@ def confirm_payment(request, pk):
 #     return redirect('cart:cart_detail')
 
 
-def get_or_create_cart(request):
-    if request.user.is_authenticated:
-        # If the user is authenticated, return their cart
-        cart, created = Cart.objects.get_or_create(user=request.user)
-    else:
-        # If the user is not authenticated, get the cart from the session
-        cart_id = request.session.get('cart_id')
-        if cart_id:
-            cart = Cart.objects.filter(id=cart_id).first()
-            if cart is None:
-                del request.session['cart_id']
-        if cart_id is None or cart is None:
-            # If the cart doesn't exist, create a new cart
-            cart = Cart.objects.create(created=timezone.now())
-            request.session['cart_id'] = cart.id
-    return cart
+# def get_or_create_cart(request):
+#     if request.user.is_authenticated:
+#         # If the user is authenticated, return their cart
+#         cart, created = Cart.objects.get_or_create(user=request.user)
+#     else:
+#         # If the user is not authenticated, get the cart from the session
+#         cart_id = request.session.get('cart_id')
+#         if cart_id:
+#             cart = Cart.objects.filter(id=cart_id).first()
+#             if cart is None:
+#                 del request.session['cart_id']
+#         if cart_id is None or cart is None:
+#             # If the cart doesn't exist, create a new cart
+#             cart = Cart.objects.create(created=timezone.now())
+#             request.session['cart_id'] = cart.id
+#     return cart
